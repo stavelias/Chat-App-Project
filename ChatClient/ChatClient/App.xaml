@@ -12,6 +12,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Teal.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="CustomMaterialDesignFlatButton" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
+                <Style.Resources>
+                    <Border x:Key="PrimaryBorderBrush" CornerRadius="0,0,0,0"></Border>
+                    <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White" />
+                </Style.Resources>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

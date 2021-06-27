@@ -11,23 +11,14 @@
         BorderThickness="1"
         BorderBrush="Black"
         Title="ChatMain" Height="610" Width="800" Background="#FF1F1F1F" WindowStartupLocation="CenterScreen" Closing="ChatWindow_Closing">
-    <Window.Resources>
-        <Style x:Key="CustomMaterialDesignFlatButton" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
-            <Style.Resources>
-                <Border x:Key="PrimaryBorderBrush" CornerRadius="0,0,0,0"></Border>
-                <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
-                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White" />
-            </Style.Resources>
-        </Style>
-    </Window.Resources>
     <Grid>
         <StackPanel x:Name="topTaskbar" Margin="0,0,0,0" Background="Black" Height="37" VerticalAlignment="Top" MouseLeftButtonDown="TopTaskbarClick">
             <TextBlock x:Name="title" Text="C H A T  C L I E N T"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
         </StackPanel>
-        <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
+        <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
             <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />
         </Button>
-        <Button x:Name="minimizeBtn"  BorderThickness="0" BorderBrush="{x:Null}" materialDesign:RippleAssist.Feedback="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Margin="0,0,50,0" MouseLeftButtonDown="MinimizeBtnClick">
+        <Button x:Name="minimizeBtn"  BorderThickness="0" BorderBrush="{x:Null}" materialDesign:RippleAssist.Feedback="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Margin="0,0,50,0" MouseLeftButtonDown="MinimizeBtnClick">
             <materialDesign:PackIcon Kind="WindowMinimize" Foreground="White" Height="31" Margin="0,5" />
         </Button>
         <TextBox x:Name="messageBox" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Write A Message..." Margin="203,556,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="502" Foreground="White"/>

@@ -120,7 +120,7 @@ namespace ChatServer {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ChatServer;component/chatservermain.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ChatServer;V1.0.0.0;component/chatservermain.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ChatServerMain.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

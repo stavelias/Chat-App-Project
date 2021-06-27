@@ -11,15 +11,6 @@
         BorderThickness="1"
         BorderBrush="Black"
         Title="MainWindow" Height="176" Width="500" Background="#FF1F1F1F" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style x:Key="CustomMaterialDesignFlatButton" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
-            <Style.Resources>
-                <Border x:Key="PrimaryBorderBrush" CornerRadius="0,0,0,0"></Border>
-                <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
-                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White" />
-            </Style.Resources>
-        </Style>
-    </Window.Resources>
     <Grid>
         <StackPanel x:Name="topTaskbar" Margin="0,0,0,0" Background="Black" Height="37" VerticalAlignment="Top" MouseLeftButtonDown="TopTaskbarClick">
             <TextBlock x:Name="title" Text="C O N N E C T"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
@@ -30,7 +21,7 @@
             <TextBox x:Name="clientName" Margin="310,33,0,0" HorizontalAlignment="Left" Text="OnLyWiN"  TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Height="38" FontSize="20" Foreground="White"/>
             <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" Background="#FF0BC8FF" BorderBrush="#FF0BC8FF" PreviewMouseLeftButtonDown="ConnectBtnClick"/>
         </Grid>
-        <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
+        <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
             <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />
 
         </Button>

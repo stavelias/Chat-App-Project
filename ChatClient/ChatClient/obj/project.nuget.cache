@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BoWRh4OnqG+Tzvj2bNvYn4/ch9reQIBpPXm+cGtajI0eUXPUNOxt0SLf+XsCz8AYiMQ48TerTIiSTRmFwX64oQ==",
+  "dgSpecHash": "ZWtUwQPuX7p8z+OCtfr1o3l/hPYpLoJ5WeNphuLNkXhbPldMUMB3HNnnxHC+syJZvTFybNnKlqWf2uwbS1Z3hg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Stav\\source\\repos\\SimpleChatApp\\SimpleChatApp\\ChatClient.csproj",
+  "projectFilePath": "C:\\Users\\Stav\\Desktop\\Dev\\Chat App Project\\Chat App Project\\ChatClient\\ChatClient\\ChatClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stav\\.nuget\\packages\\materialdesigncolors\\2.0.1\\materialdesigncolors.2.0.1.nupkg.sha512",
     "C:\\Users\\Stav\\.nuget\\packages\\materialdesignthemes\\4.1.0\\materialdesignthemes.4.1.0.nupkg.sha512"

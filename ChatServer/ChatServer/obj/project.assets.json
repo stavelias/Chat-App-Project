@@ -97,11 +97,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stav\\source\\repos\\SimpleChatServer\\SimpleChatServer\\ChatServer.csproj",
+      "projectUniqueName": "C:\\Users\\Stav\\Desktop\\Dev\\Chat App Project\\Chat App Project\\ChatServer\\ChatServer\\ChatServer.csproj",
       "projectName": "ChatServer",
-      "projectPath": "C:\\Users\\Stav\\source\\repos\\SimpleChatServer\\SimpleChatServer\\ChatServer.csproj",
+      "projectPath": "C:\\Users\\Stav\\Desktop\\Dev\\Chat App Project\\Chat App Project\\ChatServer\\ChatServer\\ChatServer.csproj",
       "packagesPath": "C:\\Users\\Stav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Stav\\source\\repos\\SimpleChatServer\\SimpleChatServer\\obj\\",
+      "outputPath": "C:\\Users\\Stav\\Desktop\\Dev\\Chat App Project\\Chat App Project\\ChatServer\\ChatServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
