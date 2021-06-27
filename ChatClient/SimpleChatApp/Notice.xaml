@@ -1,0 +1,35 @@
+﻿<Window x:Name="NoticeWindow" x:Class="ChatClient.Notice"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatClient"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        BorderThickness="1"
+        BorderBrush="Black"
+        Title="MainWindow" Height="176" Width="500" Background="#FF1F1F1F" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="CustomMaterialDesignFlatButton" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Border x:Key="PrimaryBorderBrush" CornerRadius="0,0,0,0"></Border>
+                <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
+                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White" />
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel x:Name="topTaskbar" Margin="0,0,0,0" Background="Black" Height="37" VerticalAlignment="Top" MouseLeftButtonDown="TopTaskbarClick">
+            <TextBlock x:Name="title" Text="N O T I C E"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
+        </StackPanel>
+        <Grid Margin="0,37,0,0">
+            <Button x:Name="ok" Content="OK" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" Background="#FF0BC8FF" BorderBrush="#FF0BC8FF" PreviewMouseLeftButtonDown="OKBtnClick"/>
+            <TextBlock x:Name="message" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,42" TextWrapping="Wrap" FontSize="18" FontFamily="Yu Gothic Light"/>
+        </Grid>
+        <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
+            <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />
+        </Button>
+    </Grid>
+</Window>
