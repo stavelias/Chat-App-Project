@@ -54,10 +54,17 @@ namespace ChatClient
                         Application.Current.Dispatcher.Invoke((Action)delegate
                         {
                             isClientConnected = false;
-                            ChatClientWindow.Hide();
+
+                            // Creating the notice message for the client user
                             Notice noticeWindow = new Notice();
                             noticeWindow.message.Text = " The Server has been disconnected, the client will now close.";
                             noticeWindow.Show();
+
+                            // Unsubscribing from the event, so it wont try to send a disconnection while the connection is closed
+                            ChatClientWindow.Closing -= ChatClientWindow.ChatWindow_Closing;
+
+                            // Closing the main window
+                            ChatClientWindow.Close();
                         });                     
 					}
 

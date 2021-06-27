@@ -116,7 +116,7 @@ namespace ChatClient
 
         #endregion
 
-        private void ChatWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        public void ChatWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SendMessageToServer(MessageType.Disconnect, chatClient._clientName, "", channelList.Text);
         }
