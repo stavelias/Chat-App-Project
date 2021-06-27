@@ -16,7 +16,7 @@
             <TextBlock x:Name="title" Text="N O T I C E"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
         </StackPanel>
         <Grid Margin="0,37,0,0">
-            <Button x:Name="ok" Content="OK" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" Background="#FF0BC8FF" BorderBrush="#FF0BC8FF" PreviewMouseLeftButtonDown="OKBtnClick"/>
+            <Button x:Name="ok" Content="OK" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" PreviewMouseLeftButtonDown="OKBtnClick"/>
             <TextBlock x:Name="message" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,42" TextWrapping="Wrap" FontSize="18" FontFamily="Yu Gothic Light"/>
         </Grid>
         <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">

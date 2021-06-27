@@ -10,7 +10,7 @@
         WindowStyle="None"
         BorderThickness="1"
         BorderBrush="Black"
-        Title="ChatServerMain" Height="543" Width="800">
+        Title="ChatServerMain" Height="560" Width="800">
     <Window.Resources>
         <Style x:Key="CustomMaterialDesignFlatButton" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
             <Style.Resources>
@@ -30,11 +30,11 @@
         <Button x:Name="minimizeBtn" BorderThickness="0" materialDesign:RippleAssist.Feedback="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Click="MinimizeBtnClick" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Margin="0,0,46,0">
             <materialDesign:PackIcon Kind="WindowMinimize" Foreground="White" Height="31" Margin="0,5" />
         </Button>
-        <GroupBox Header="M E S S A G E S"  Margin="16,80,16,68"   materialDesign:ColorZoneAssist.Mode="Custom"    materialDesign:ColorZoneAssist.Foreground="Black" materialDesign:ColorZoneAssist.Background="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular">
+        <GroupBox Header="M E S S A G E S"  Margin="16,80,16,80"   materialDesign:ColorZoneAssist.Mode="Custom"    materialDesign:ColorZoneAssist.Foreground="Black" materialDesign:ColorZoneAssist.Background="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular">
             <TextBox x:Name="messages" Style="{x:Null}" Foreground="White" FontFamily="Consolas" IsReadOnly="True" Background="#FF151515" BorderBrush="#00ABADB3" />
         </GroupBox>
-        <Button x:Name="startServer" Content="Start" HorizontalAlignment="Left" Margin="720,492,0,0" VerticalAlignment="Top" Click="StartServerBtnClick" Background="#FF0BC8FF"/>
-        <Button x:Name="addChannel" Content="Add Channel" HorizontalAlignment="Left" Margin="16,492,0,0" VerticalAlignment="Top" Click="AddChannelBtnClick" Background="#FF0BC8FF" Width="117"/>
-        <TextBox x:Name="channel" HorizontalAlignment="Left" Margin="150,492,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.351,0.486" Foreground="White" Height="32" FontSize="18"/>
+        <Button x:Name="startServer" Style="{DynamicResource CustomMaterialDesignButton}" Content="Start" HorizontalAlignment="Left" Margin="720,502,0,0" VerticalAlignment="Top" Click="StartServerBtnClick"/>
+        <Button x:Name="addChannel" Style="{DynamicResource CustomMaterialDesignButton}" Content="Add Channel" HorizontalAlignment="Left" Margin="214,502,0,0" VerticalAlignment="Top" Click="AddChannelBtnClick" Width="117"/>
+        <TextBox x:Name="channel" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="New Channel" HorizontalAlignment="Left" Margin="16,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.351,0.486" Foreground="White" Height="44" FontSize="14"/>
     </Grid>
 </Window>

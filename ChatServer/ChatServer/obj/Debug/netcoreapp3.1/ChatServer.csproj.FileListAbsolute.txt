@@ -20,3 +20,26 @@ C:\Users\Stav\source\repos\SimpleChatServer\SimpleChatServer\obj\Debug\netcoreap
 C:\Users\Stav\source\repos\SimpleChatServer\SimpleChatServer\obj\Debug\netcoreapp3.1\ChatServer.dll
 C:\Users\Stav\source\repos\SimpleChatServer\SimpleChatServer\obj\Debug\netcoreapp3.1\ChatServer.pdb
 C:\Users\Stav\source\repos\SimpleChatServer\SimpleChatServer\obj\Debug\netcoreapp3.1\ChatServer.genruntimeconfig.cache
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.exe
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.deps.json
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.runtimeconfig.json
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.runtimeconfig.dev.json
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.dll
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\ChatServer.pdb
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\MaterialDesignColors.dll
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\bin\Debug\netcoreapp3.1\MaterialDesignThemes.Wpf.dll
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csprojAssemblyReference.cache
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServerMain.g.cs
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer_MarkupCompile.cache
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer_MarkupCompile.lref
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\App.baml
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServerMain.baml
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.g.resources
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.AssemblyInfoInputs.cache
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.AssemblyInfo.cs
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csproj.CoreCompileInputs.cache
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.csproj.CopyComplete
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.dll
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.pdb
+C:\Users\Stav\Desktop\Dev\Chat App Project\Chat App Project\ChatServer\ChatServer\obj\Debug\netcoreapp3.1\ChatServer.genruntimeconfig.cache

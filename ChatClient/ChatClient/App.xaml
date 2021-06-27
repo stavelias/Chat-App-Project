@@ -19,6 +19,24 @@
                     <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White" />
                 </Style.Resources>
             </Style>
+            <Style x:Key="CustomMaterialDesignButton" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" TargetType="{x:Type Button}">
+                <Style.Resources>
+                    <Border x:Key="PrimaryBorderBrush" CornerRadius="0,0,0,0"></Border>
+                    <Color x:Key="PrimaryHueLightBrushColor">#FF0BC8FF</Color>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FF0BC8FF" />
+                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White"></SolidColorBrush>
+                </Style.Resources>
+            </Style>
+            <Style x:Key="CustomMaterialDesignTextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF0BC8FF"></SolidColorBrush>
+                </Style.Resources>
+            </Style>
+            <Style x:Key="CustomMaterialDesignComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF0BC8FF"></SolidColorBrush>
+                </Style.Resources>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

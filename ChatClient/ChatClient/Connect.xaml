@@ -16,10 +16,10 @@
             <TextBlock x:Name="title" Text="C O N N E C T"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
         </StackPanel>
         <Grid Margin="0,37,0,0">
-            <TextBox x:Name="IP" Margin="30,33,0,0" HorizontalAlignment="Left" Text="127.0.0.1"  TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Height="38" FontSize="20" Foreground="White"/>
-            <TextBox x:Name="port" Margin="210,33,0,0" HorizontalAlignment="Left" Text="5000"  TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Height="38" FontSize="20" Foreground="White"/>
-            <TextBox x:Name="clientName" Margin="310,33,0,0" HorizontalAlignment="Left" Text="OnLyWiN"  TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Height="38" FontSize="20" Foreground="White"/>
-            <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" Background="#FF0BC8FF" BorderBrush="#FF0BC8FF" PreviewMouseLeftButtonDown="ConnectBtnClick"/>
+            <TextBox x:Name="IP" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="IP" Margin="30,29,0,0" HorizontalAlignment="Left" Text="127.0.0.1"  TextWrapping="Wrap" VerticalAlignment="Top" Width="113" Height="46" FontSize="16" Foreground="White"/>
+            <TextBox x:Name="port" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Port" Margin="161,29,0,0" HorizontalAlignment="Left" Text="5000"  TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Height="46" FontSize="16" Foreground="White"/>
+            <TextBox x:Name="clientName" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Client Name" Margin="260,29,0,0" HorizontalAlignment="Left" Text="OnLyWiN"  TextWrapping="Wrap" VerticalAlignment="Top" Width="207" Height="46" FontSize="16" Foreground="White"/>
+            <Button x:Name="connect" Content="Connect" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" PreviewMouseLeftButtonDown="ConnectBtnClick"/>
         </Grid>
         <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
             <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />
