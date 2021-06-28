@@ -14,7 +14,7 @@ namespace ChatServer
 			ClientName = messageFrags[1];
 			MessageText = messageFrags[2];
 			Channel = messageFrags[3];
-			PublicMessage = "[" + ClientName + "] " + MessageText;
+			PublicMessage = $"[{ClientName}] {MessageText}";
 		}
 
 		public static string CreateMessage(MessageType type, string clientName, string clientMessage, string channel)

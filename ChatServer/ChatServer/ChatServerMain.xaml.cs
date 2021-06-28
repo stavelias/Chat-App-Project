@@ -32,7 +32,7 @@ namespace ChatServer
             await Task.Run(() =>
             {
             Application.Current.Dispatcher.Invoke(() => {
-                messages.AppendText("Server has been started on IP: " + IP + " And Port: " + PORT.ToString() + "\nListening...\n");
+                messages.AppendText($"Server has been started on IP: {IP} And Port: {PORT.ToString()}\nListening...\n");
             });    
                 chatServer.AcceptClients();
             });

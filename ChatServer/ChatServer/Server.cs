@@ -92,8 +92,8 @@ namespace ChatServer
 					{
                         case MessageType.Connect:
                             // Creates the join and leave strings
-                            joinStr = clientMessage.ClientName + " Connected to the server.";
-                            leaveStr = clientMessage.ClientName + " has been Disconnected.";
+                            joinStr = $"{clientMessage.ClientName} Connected to the server.";
+                            leaveStr =  $"{clientMessage.ClientName} has been Disconnected.";
 
                             // Notifies everyone about the new conneciton
                             SystemMessage(MessageType.Connect, joinStr, null, null);
@@ -114,7 +114,7 @@ namespace ChatServer
                         case MessageType.Regular:
                             // Sends everyone the message
                             SendMessage(null, Message.CreateMessage(MessageType.Regular, clientMessage.ClientName, clientMessage.MessageText, clientMessage.Channel), null, clientMessage.Channel);
-                            AddToMessages("[" + clientMessage.Channel + "] " + clientMessage.PublicMessage);
+                            AddToMessages($"[{clientMessage.Channel}] {clientMessage.PublicMessage}");
                             break;
                         case MessageType.MoveChannel:
                             MoveChannelRequest(clientMessage, client);
@@ -131,7 +131,7 @@ namespace ChatServer
                         bClientConnected = false;
                         SystemMessage(MessageType.Disconnect, leaveStr, client, currentChannel);
                         if(!(e is IOException && e.InnerException is SocketException))
-                            AddToMessages("[" + e.GetType() + "] " + e.Message);
+                            AddToMessages($"[{e.GetType()}] {e.Message}");
                     }
                 }
 
@@ -143,7 +143,7 @@ namespace ChatServer
             // Adds a message to the messages list on the main window UI
             Application.Current.Dispatcher.Invoke(() =>
             {
-                mainChatServer.messages.AppendText("\n" + message);
+                mainChatServer.messages.AppendText($"\n{message}");
                 mainChatServer.messages.ScrollToEnd();
             });
         }
