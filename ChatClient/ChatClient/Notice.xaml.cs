@@ -24,7 +24,18 @@ namespace ChatClient
 
 		private void OKBtnClick(object sender, MouseButtonEventArgs e)
 		{
+			this.Close();
+		}
+
+		public void ExitApp(object sender, RoutedEventArgs e)
+		{
 			Environment.Exit(1);
+		}
+
+		public void ServerQueriesResult(object sender, RoutedEventArgs e)
+		{
+			ChatClientWindow.Show();
+			this.Close();
 		}
 
 		#region TopTaskbar Functions
@@ -39,5 +50,7 @@ namespace ChatClient
 			Environment.Exit(0);
 		}
 		#endregion
+
+		public ChatMain ChatClientWindow;
 	}
 }

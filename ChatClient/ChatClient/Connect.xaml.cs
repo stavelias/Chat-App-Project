@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Security.Cryptography;
 using static ChatClient.Message;
+using System.Threading.Tasks;
 
 namespace ChatClient
 {
@@ -26,6 +27,7 @@ namespace ChatClient
 			
 			//Variable Initialization
 			chatMain = new ChatMain();
+			chatMain.ConnectWindow = this;
 			isClientConnected = false;
 
 			// Reading Connection Settings
@@ -34,11 +36,14 @@ namespace ChatClient
 
 
 
-		public void ConnectClient()
+		public void IsClientConnectedCheck()
 		{
 			// Connects the client to the server
-			chatMain.ConnectToServer();
-			isClientConnected = true;
+			if(!isClientConnected)
+			{
+				chatMain.ConnectToServer();
+				isClientConnected = true;
+			}
 		}
 
 		public void ReadConfig()
@@ -91,20 +96,37 @@ namespace ChatClient
 
 		private void LoginBtnClick(object sender, MouseButtonEventArgs e)
 		{
+			Login();
+		}
+
+		private void RegisterBtnClick(object sender, MouseButtonEventArgs e)
+		{
+			Register();
+		}
+
+		private async void Login()
+		{
+			IsClientConnectedCheck();
+			await Task.Delay(WAIT_FOR_CLIENT);
+
 			byte[] pwdBytes = System.Text.Encoding.UTF8.GetBytes(pwdLogin.Text);
 			string encryptedPwd = System.Convert.ToBase64String(pwdBytes);
+			chatMain.chatClient._clientName = unLogin.Text;
 
 			// Sending the login request to the server
 			chatMain.SendRequestToServer(CreateAuthRequest(MessageType.LoginRequest, unLogin.Text, encryptedPwd));
 		}
 
-		private void RegisterBtnClick(object sender, MouseButtonEventArgs e)
+		private async void Register()
 		{
-			byte[] pwdBytes = System.Text.Encoding.UTF8.GetBytes(pwdLogin.Text);
+			await Task.Run(() => IsClientConnectedCheck());
+			await Task.Delay(WAIT_FOR_CLIENT);
+
+			byte[] pwdBytes = System.Text.Encoding.UTF8.GetBytes(pwdReg.Text);
 			string encryptedPwd = System.Convert.ToBase64String(pwdBytes);
 
-			// Sending the login request to the server
-			chatMain.SendRequestToServer(CreateAuthRequest(MessageType.RegisterationRequest, unLogin.Text, encryptedPwd));
+			// Sending the registration request to the server
+			chatMain.SendRequestToServer(CreateAuthRequest(MessageType.RegisterationRequest, unReg.Text, encryptedPwd));
 		}
 
 		#endregion
@@ -124,5 +146,6 @@ namespace ChatClient
 
 		public ChatMain chatMain;
 		public bool isClientConnected;
+		private const int WAIT_FOR_CLIENT = 300;
 	}
 }

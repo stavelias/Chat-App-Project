@@ -11,10 +11,24 @@ namespace ChatClient
 		{
 			string[] messageFrags = clientMsg.Split(SEPERATOR);
 			Type = (MessageType)(Int32.Parse(messageFrags[0]));
-			ClientName = messageFrags[1];
-			MessageText = messageFrags[2];
-			Channel = messageFrags[3];
-			PublicMessage = $"[{ClientName}] {MessageText}";
+
+			switch (Type)
+			{
+				case MessageType.LoginRequest:
+					Result = (QueryResult)(Int32.Parse(messageFrags[1]));
+					ClientName = messageFrags[2];
+					break;
+				case MessageType.RegisterationRequest:
+					Result = (QueryResult)(Int32.Parse(messageFrags[1]));
+					ClientName = messageFrags[2];
+					break;
+				default:
+					ClientName = messageFrags[1];
+					MessageText = messageFrags[2];
+					Channel = messageFrags[3];
+					PublicMessage = $"[{ClientName}] {MessageText}";
+					break;
+			}
 		}
 
 		public static string CreateMessage(MessageType type, string clientName, string clientMessage, string channel)
@@ -26,6 +40,8 @@ namespace ChatClient
 		{
 			return $"{(int)type}{SEPERATOR}{username}{SEPERATOR}{password}";
 		}
+
+
 
 		public enum MessageType
 		{
@@ -39,11 +55,24 @@ namespace ChatClient
 			RegisterationRequest = 7
 		}
 
+		public enum QueryResult
+		{
+			Ok = 0,
+			LoginSuccessful = 1,
+			RegisterationSuccessful = 2,
+			IncorrectDetails = 3,
+			UsernameAlreadyExists = 4
+		}
+
 		const string SEPERATOR = "~*~";
 		public MessageType Type { get; set; }
+
 		public string ClientName { get; private set; }
 		public string MessageText { get; private set; }
 		public string Channel { get; private set; }
+
+		public QueryResult Result;
+
 		public string PublicMessage;
 	}
 }

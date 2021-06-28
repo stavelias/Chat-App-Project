@@ -5,8 +5,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using static ChatServer.Message;
+using static ChatServer.SqlQueries;
 
 namespace ChatServer
 {
@@ -49,7 +51,7 @@ namespace ChatServer
             client.Channel = DEFAULT_CHANNEL;
 
             // Intialization of Connection and Disconnection Messages
-            string leaveStr = "", joinStr = "";
+            
 
             // Defining the read buffer
             byte[] buffer = new byte[1024];
@@ -91,15 +93,11 @@ namespace ChatServer
                     switch(messageType)
 					{
                         case MessageType.Connect:
-                            // Creates the join and leave strings
-                            joinStr = $"{clientMessage.ClientName} Connected to the server.";
-                            leaveStr =  $"{clientMessage.ClientName} has been Disconnected.";
 
-                            // Notifies everyone about the new conneciton
-                            SystemMessage(MessageType.Connect, joinStr, null, null);
+                            
 
                             // Sends the client the channel list
-                            UpdateChannels(client, null);
+                            
 
                             // Cleans the buffer
                             buffer = new byte[1024];
@@ -118,6 +116,12 @@ namespace ChatServer
                             break;
                         case MessageType.MoveChannel:
                             MoveChannelRequest(clientMessage, client);
+                            break;
+                        case MessageType.LoginRequest:
+                            Login(client, clientMessage.Username, clientMessage.Password, joinStr);
+                            break;
+                        case MessageType.RegisterationRequest:
+                            Register(client, clientMessage.Username, clientMessage.Password);
                             break;
                         default:
                             break;
@@ -143,7 +147,7 @@ namespace ChatServer
             // Adds a message to the messages list on the main window UI
             Application.Current.Dispatcher.Invoke(() =>
             {
-                mainChatServer.messages.AppendText($"\n{message}");
+				mainChatServer.messages.AppendText($"\n{message}");
                 mainChatServer.messages.ScrollToEnd();
             });
         }
@@ -214,9 +218,9 @@ namespace ChatServer
                 oldChannel - The old channel that the user is moving from
                 newChannel - the new channel that the user wants to move to
             */
+
             string oldChannel = moveChannelReq.Channel;
             string newChannel = moveChannelReq.MessageText;
-
             // Checks if the move request is valid, and it's a new channel
             if (oldChannel == newChannel || oldChannel == "") return;
 
@@ -251,9 +255,51 @@ namespace ChatServer
             else
                 SendMessage(null, updateString, null, null);
         }
-        #endregion region
+		#endregion region
 
-        const string DEFAULT_CHANNEL = "General Channel";
+		#region Login System
+
+        public async void Login(ChatClient client, string username, string password, string joinStr)
+		{
+            string query = $"SELECT username FROM Users WHERE [username]=\'{username}\' AND [password]=\'{password}\'";
+
+            QueryResult queryResult = SendQuery(MessageType.LoginRequest, query);
+
+            NetworkStream stream = client.TcpClient.GetStream();
+            string resultMessage = CreateResultMessage(MessageType.LoginRequest, queryResult, username);
+            byte[] resultMessageBytes = ASCIIEncoding.ASCII.GetBytes(resultMessage);
+            stream.Write(resultMessageBytes);
+            
+            if(queryResult == QueryResult.LoginSuccessful)
+			{
+                // Creates the join and leave strings
+                joinStr = $"{username} Connected to the server.";
+                leaveStr = $"{username} has been Disconnected.";
+
+                // Notifies everyone about the new conneciton
+                SystemMessage(MessageType.Connect, joinStr, null, null);
+                await Task.Delay(MESSAGE_COOLDOWN);
+                UpdateChannels(client, null);
+            }
+        }
+
+        public void Register(ChatClient client, string username, string password)
+		{
+            string query = $"INSERT OR IGNORE INTO Users VALUES(\"{username}\", \"{password}\")";
+            
+            QueryResult queryResult = SendQuery(MessageType.RegisterationRequest, query);
+
+            NetworkStream stream = client.TcpClient.GetStream();
+            string resultMessage = CreateResultMessage(MessageType.RegisterationRequest, queryResult, username);
+            byte[] resultMessageBytes = ASCIIEncoding.ASCII.GetBytes(resultMessage);
+            stream.Write(resultMessageBytes);
+        }
+
+		#endregion
+
+		const string DEFAULT_CHANNEL = "General Channel"; 
+        private const int MESSAGE_COOLDOWN = 300;
+        public string leaveStr = "", joinStr = "";
 
         private TcpListener _server;
         private Boolean _isRunning;

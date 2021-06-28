@@ -16,8 +16,8 @@
             <TextBlock x:Name="title" Text="C O N N E C T"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
         </StackPanel>
         <Grid Margin="0,37,0,0">
-            <TabControl Style="{StaticResource CustomMaterialDesignTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Background="#FF1F1F1F">
-                <TabItem Header="{materialDesign:PackIcon Kind=Login, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <TabControl x:Name="tabs" Style="{StaticResource CustomMaterialDesignTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Background="#FF1F1F1F">
+                <TabItem x:Name="loginTab" Header="{materialDesign:PackIcon Kind=Login, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Grid>
                         <TextBlock Text="Login" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
                         <TextBox x:Name="unLogin" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Username"  HorizontalAlignment="Center"  Width="200" Margin="0,43,0,133" Height="40"></TextBox>
@@ -25,7 +25,7 @@
                         <Button x:Name="loginBtn" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Center" Width="100" Content="Login" Margin="0,167,0,17" PreviewMouseLeftButtonDown="LoginBtnClick"></Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="{materialDesign:PackIcon Kind=AccountPlus, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem x:Name="registerTab" Header="{materialDesign:PackIcon Kind=AccountPlus, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Grid>
                         <TextBlock Text="Register" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
                         <TextBox x:Name="unReg" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Username"  HorizontalAlignment="Center"  Width="200" Margin="0,43,0,133" Height="40"></TextBox>
@@ -33,7 +33,7 @@
                         <Button x:Name="registerBtn" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Center" Width="100" Content="Register" Margin="0,167,0,17" PreviewMouseLeftButtonDown="RegisterBtnClick"></Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="{materialDesign:PackIcon Kind=WifiSettings, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem x:Name="connectionSettingsTab" Header="{materialDesign:PackIcon Kind=WifiSettings, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Grid>
                         <TextBlock Text="Connection Settings" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
                         <TextBox x:Name="ip" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="IP"  HorizontalAlignment="Center"  Width="144" Margin="0,43,0,133" Height="40"></TextBox>

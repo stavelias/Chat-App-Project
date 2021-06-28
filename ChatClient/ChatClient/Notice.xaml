@@ -17,7 +17,7 @@
         </StackPanel>
         <Grid Margin="0,37,0,0">
             <Button x:Name="ok" Content="OK" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" PreviewMouseLeftButtonDown="OKBtnClick"/>
-            <TextBlock x:Name="message" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,42" TextWrapping="Wrap" FontSize="18" FontFamily="Yu Gothic Light"/>
+            <TextBlock x:Name="message" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,42" TextWrapping="Wrap" FontSize="18" FontFamily="Microsoft YaHei Light" Text="Welcome Stav."/>
         </Grid>
         <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
             <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />

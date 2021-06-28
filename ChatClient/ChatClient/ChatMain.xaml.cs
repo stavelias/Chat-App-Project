@@ -49,7 +49,15 @@ namespace ChatClient
         public void SendMessageToServer(MessageType type, string clientName, string message)
         {
             // Sending the data to the server
-            chatClient.SendData(Message.CreateMessage(type, clientName, message, channelList.Text));
+            if(authCompelete)
+			{
+                chatClient.SendData(Message.CreateMessage(type, clientName, message, channelList.Text));
+            }
+            else
+			{
+                chatClient.SendData(Message.CreateMessage(type, clientName, message, "NewConnection"));
+                authCompelete = true;
+            }
         }
 
         public void SendRequestToServer(string request)
@@ -91,20 +99,29 @@ namespace ChatClient
             channelList.SelectedIndex = 0;
         }
 
-        private void ChannelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ChannelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Event Triggered when client requests to move a channel
+            SendMoveChannelRequest();
+        }
+
+        public void SendMoveChannelRequest()
+		{
             if (chatClient != null && channelList.SelectedValue != null)
             {
                 // Gets the old and new channel
                 string oldChannel = channelList.Text;
                 string newChannel = channelList.SelectedValue.ToString();
+                string moveChannelReqStr = $"{oldChannel} {newChannel}";
+
+                if (PreviousMoveChannelRequest == moveChannelReqStr) return;
+                PreviousMoveChannelRequest = moveChannelReqStr;
 
                 // If old channel isn't the same as the new, send a move request 
                 if (oldChannel != newChannel)
                     SendMessageToServer(MessageType.MoveChannel, chatClient._clientName, newChannel);
             }
         }
+
 
         #endregion
 
@@ -132,6 +149,11 @@ namespace ChatClient
             SendMessageToServer(MessageType.Disconnect, chatClient._clientName, "");
         }
 
+        public const string DEFAULT_CHANNEL = "General Channel";
+
+        public string PreviousMoveChannelRequest;
+        public bool authCompelete = false;
+        public Connect ConnectWindow;
         public Client chatClient;
         public string IP;
         public int port;

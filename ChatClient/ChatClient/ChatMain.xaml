@@ -26,8 +26,7 @@
             <TextBox x:Name="messages" Style="{x:Null}" Foreground="White" FontFamily="Consolas" IsReadOnly="True" Background="#FF151515" BorderBrush="#00ABADB3" />
         </GroupBox>
         <Button x:Name="sendMsgBtn" Style="{DynamicResource CustomMaterialDesignButton}" Content="Send" HorizontalAlignment="Left" Margin="711,562,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown="SendMsgBtnClick"/>
-        <ComboBox x:Name="channelList" Style="{DynamicResource CustomMaterialDesignComboBox}" materialDesign:HintAssist.Hint="Channel" Foreground="White" HorizontalAlignment="Left" Margin="16,556,0,0" VerticalAlignment="Top"  Width="174" SelectedIndex="0" SelectionChanged="ChannelList_SelectionChanged" SelectedValuePath="Content" Height="43">
-            <ComboBoxItem>General Channel</ComboBoxItem>
+        <ComboBox x:Name="channelList" Style="{DynamicResource CustomMaterialDesignComboBox}" materialDesign:HintAssist.Hint="Channel" Foreground="White" HorizontalAlignment="Left" Margin="16,556,0,0" VerticalAlignment="Top"  Width="174" SelectedValuePath="Content" Height="43" SelectionChanged="ChannelList_SelectionChanged" SelectedIndex="0">
         </ComboBox>
     </Grid>
 </Window>

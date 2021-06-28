@@ -23,8 +23,7 @@ namespace ChatClient
 
         public Client(string IP, int port, ChatMain ChatClient)
         {
-            ChatClientWindow = ChatClient;
-            _clientName = "Temp";
+            ChatClientWindow = ChatClient;           
 			try
 			{
                 _client = new TcpClient(IP, port);

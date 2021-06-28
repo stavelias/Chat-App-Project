@@ -1,11 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "ic0perwPbxNUJ+d5Ev0lZ5r+c2kqL6Jl44xO4tE6VVpTszneXU1poky5GqYLQZLS1uVPnT9U6sMhEJerP09c7Q==",
+  "dgSpecHash": "mOY6soBl8l28Z81dhh93BvxORmH17SBwrmogXr/7HsV8U7H2dOvrKc+cGrJNdlWpYVMpIRpps1wVoZjeEZEpkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Stav\\Desktop\\Dev\\Chat App Project\\Chat App Project\\ChatServer\\ChatServer\\ChatServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stav\\.nuget\\packages\\materialdesigncolors\\2.0.1\\materialdesigncolors.2.0.1.nupkg.sha512",
-    "C:\\Users\\Stav\\.nuget\\packages\\materialdesignthemes\\4.1.0\\materialdesignthemes.4.1.0.nupkg.sha512"
+    "C:\\Users\\Stav\\.nuget\\packages\\materialdesignthemes\\4.1.0\\materialdesignthemes.4.1.0.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\microsoft.data.sqlite\\5.0.7\\microsoft.data.sqlite.5.0.7.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.7\\microsoft.data.sqlite.core.5.0.7.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "C:\\Users\\Stav\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }
