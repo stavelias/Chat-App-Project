@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -23,28 +24,38 @@ namespace ChatClient
 	/// </summary>
 	public partial class ChatMain : Window
 	{
-        Client chatClient;
+        
 
         // Consumers register to receive data.
 
-        public ChatMain(string IP, int port, string clientName)
+        public ChatMain()
 		{
-			InitializeComponent();
-            chatClient = new Client(IP, port, this, clientName);
+            InitializeComponent();   
+        }
+
+        public void ConnectToServer()
+		{
+            chatClient = new Client(IP, port, this);
         }
 
         #region Send Message Functions
 
         private void SendMsgBtnClick(object sender, MouseButtonEventArgs e)
         {
-            SendMessageToServer(MessageType.Regular, chatClient._clientName, messageBox.Text, channelList.Text);
+            SendMessageToServer(MessageType.Regular, chatClient._clientName, messageBox.Text);
             messageBox.Text = "";
         }
 
-        private void SendMessageToServer(MessageType type, string clientName, string message, string channel)
+        public void SendMessageToServer(MessageType type, string clientName, string message)
         {
             // Sending the data to the server
             chatClient.SendData(Message.CreateMessage(type, clientName, message, channelList.Text));
+        }
+
+        public void SendRequestToServer(string request)
+        {
+            // Sending the data to the server
+            chatClient.SendData(request);
         }
 
         #endregion
@@ -91,7 +102,7 @@ namespace ChatClient
 
                 // If old channel isn't the same as the new, send a move request 
                 if (oldChannel != newChannel)
-                    SendMessageToServer(MessageType.MoveChannel, chatClient._clientName, newChannel, oldChannel);
+                    SendMessageToServer(MessageType.MoveChannel, chatClient._clientName, newChannel);
             }
         }
 
@@ -118,7 +129,11 @@ namespace ChatClient
 
         public void ChatWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SendMessageToServer(MessageType.Disconnect, chatClient._clientName, "", channelList.Text);
+            SendMessageToServer(MessageType.Disconnect, chatClient._clientName, "");
         }
+
+        public Client chatClient;
+        public string IP;
+        public int port;
     }
 }

@@ -21,21 +21,36 @@ namespace ChatClient
         // Consumers register to receive data.
         public event EventHandler<DataReceivedEventArgs> DataReceived;
 
-        public Client(string IP, int port, ChatMain ChatClient, string clientName)
+        public Client(string IP, int port, ChatMain ChatClient)
         {
             ChatClientWindow = ChatClient;
-            _clientName = clientName;
+            _clientName = "Temp";
+			try
+			{
+                _client = new TcpClient(IP, port);
+                _stream = _client.GetStream();
 
-            _client = new TcpClient(IP, port);
-            _stream = _client.GetStream();
+                _receiver = new Receiver(_stream, ChatClient);
+                _sender = new Sender(_stream, ChatClient);
 
-            _receiver = new Receiver(_stream, ChatClient);
-            _sender = new Sender(_stream, ChatClient);
+                _receiver.DataReceived += OnDataReceived;
 
-            _receiver.DataReceived += OnDataReceived;
+                // Informs the Server that this client has been connected
+                SendData(Message.CreateMessage(MessageType.Connect, _clientName, "", "General Channel"));
+            }
+            catch(Exception ex)
+			{
+                // Creating the notice message for the client user
+                Notice noticeWindow = new Notice();
+                noticeWindow.message.Text = " The Server is offline, the client will now close.";
+                noticeWindow.Show();
 
-            // Informs the Server that this client has been connected
-            SendData(Message.CreateMessage(MessageType.Connect, _clientName, "", "General Channel"));
+                // Unsubscribing from the event, so it wont try to send a disconnection while the connection is closed
+                ChatClientWindow.Closing -= ChatClientWindow.ChatWindow_Closing;
+
+                // Closing the main window
+                ChatClientWindow.Close();
+            }
         }
 
         private void OnDataReceived(object sender, DataReceivedEventArgs e)

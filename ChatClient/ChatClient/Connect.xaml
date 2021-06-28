@@ -10,16 +10,38 @@
         WindowStyle="None"
         BorderThickness="1"
         BorderBrush="Black"
-        Title="MainWindow" Height="176" Width="500" Background="#FF1F1F1F" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="255" Width="494" Background="#FF1F1F1F" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel x:Name="topTaskbar" Margin="0,0,0,0" Background="Black" Height="37" VerticalAlignment="Top" MouseLeftButtonDown="TopTaskbarClick">
             <TextBlock x:Name="title" Text="C O N N E C T"  TextWrapping="Wrap" Width="284" Height="37" HorizontalAlignment="Left" Foreground="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular"  FontSize="20" Padding="20,7,0,0"/>
         </StackPanel>
         <Grid Margin="0,37,0,0">
-            <TextBox x:Name="IP" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="IP" Margin="30,29,0,0" HorizontalAlignment="Left" Text="127.0.0.1"  TextWrapping="Wrap" VerticalAlignment="Top" Width="113" Height="46" FontSize="16" Foreground="White"/>
-            <TextBox x:Name="port" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Port" Margin="161,29,0,0" HorizontalAlignment="Left" Text="5000"  TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Height="46" FontSize="16" Foreground="White"/>
-            <TextBox x:Name="clientName" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Client Name" Margin="260,29,0,0" HorizontalAlignment="Left" Text="OnLyWiN"  TextWrapping="Wrap" VerticalAlignment="Top" Width="207" Height="46" FontSize="16" Foreground="White"/>
-            <Button x:Name="connect" Content="Connect" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Left" Margin="399,89,0,0" VerticalAlignment="Top" Width="85" PreviewMouseLeftButtonDown="ConnectBtnClick"/>
+            <TabControl Style="{StaticResource CustomMaterialDesignTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Background="#FF1F1F1F">
+                <TabItem Header="{materialDesign:PackIcon Kind=Login, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Grid>
+                        <TextBlock Text="Login" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
+                        <TextBox x:Name="unLogin" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Username"  HorizontalAlignment="Center"  Width="200" Margin="0,43,0,133" Height="40"></TextBox>
+                        <TextBox x:Name="pwdLogin" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Password"  HorizontalAlignment="Center"  Width="200" Margin="0,101,0,75" Height="40"></TextBox>
+                        <Button x:Name="loginBtn" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Center" Width="100" Content="Login" Margin="0,167,0,17" PreviewMouseLeftButtonDown="LoginBtnClick"></Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{materialDesign:PackIcon Kind=AccountPlus, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Grid>
+                        <TextBlock Text="Register" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
+                        <TextBox x:Name="unReg" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Username"  HorizontalAlignment="Center"  Width="200" Margin="0,43,0,133" Height="40"></TextBox>
+                        <TextBox x:Name="pwdReg" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Password"  HorizontalAlignment="Center"  Width="200" Margin="0,101,0,75" Height="40"></TextBox>
+                        <Button x:Name="registerBtn" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Center" Width="100" Content="Register" Margin="0,167,0,17" PreviewMouseLeftButtonDown="RegisterBtnClick"></Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{materialDesign:PackIcon Kind=WifiSettings, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Grid>
+                        <TextBlock Text="Connection Settings" Height="30" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="#FF0BC8FF" FontWeight="Bold"></TextBlock>
+                        <TextBox x:Name="ip" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="IP"  HorizontalAlignment="Center"  Width="144" Margin="0,43,0,133" Height="40"></TextBox>
+                        <TextBox x:Name="port" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Port"  HorizontalAlignment="Center"  Width="81" Margin="0,101,0,75" Height="40"></TextBox>
+                        <Button x:Name="updateConfig" Style="{DynamicResource CustomMaterialDesignButton}" HorizontalAlignment="Center" Width="100" Content="Update" Margin="0,167,0,17" PreviewMouseLeftButtonDown="UpdateConfigBtnClick"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Grid>
         <Button x:Name="exitBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Style="{DynamicResource CustomMaterialDesignFlatButton}" Width="46" Click="ExitBtnClick">
             <materialDesign:PackIcon Kind="WindowClose" Foreground="Red" />

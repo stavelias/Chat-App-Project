@@ -19,7 +19,7 @@ namespace ChatServer
 
 		public static string CreateMessage(MessageType type, string clientName, string clientMessage, string channel)
 		{
-			return ((int)type).ToString() + SEPERATOR + clientName + SEPERATOR + clientMessage + SEPERATOR + channel;
+			return $"{(int)type}{SEPERATOR}{clientName}{SEPERATOR}{clientMessage}{SEPERATOR}{channel}";
 		}
 
 		public enum MessageType
@@ -29,7 +29,9 @@ namespace ChatServer
 			Regular = 2,
 			MoveChannel = 3,
 			ChannelsUpdate = 4,
-			SystemMessage = 5
+			SystemMessage = 5,
+			LoginRequest = 6,
+			RegisterationRequest = 7
 		}
 
 		const string SEPERATOR = "~*~";

@@ -37,6 +37,12 @@
                     <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF0BC8FF"></SolidColorBrush>
                 </Style.Resources>
             </Style>
+
+            <Style x:Key="CustomMaterialDesignTabControl" BasedOn="{StaticResource MaterialDesignNavigatilRailTabControl}" TargetType="{x:Type TabControl}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF0BC8FF"></SolidColorBrush>
+                </Style.Resources>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

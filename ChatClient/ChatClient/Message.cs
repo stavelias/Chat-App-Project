@@ -19,7 +19,12 @@ namespace ChatClient
 
 		public static string CreateMessage(MessageType type, string clientName, string clientMessage, string channel)
 		{
-			return ((int)type).ToString() + SEPERATOR + clientName + SEPERATOR + clientMessage + SEPERATOR + channel;
+			return $"{(int)type}{SEPERATOR}{clientName}{SEPERATOR}{clientMessage}{SEPERATOR}{channel}";
+		}
+
+		public static string CreateAuthRequest(MessageType type, string username, string password)
+		{
+			return $"{(int)type}{SEPERATOR}{username}{SEPERATOR}{password}";
 		}
 
 		public enum MessageType
@@ -29,7 +34,9 @@ namespace ChatClient
 			Regular = 2,
 			MoveChannel = 3,
 			ChannelsUpdate = 4,
-			SystemMessage = 5
+			SystemMessage = 5,
+			LoginRequest = 6,
+			RegisterationRequest = 7
 		}
 
 		const string SEPERATOR = "~*~";
