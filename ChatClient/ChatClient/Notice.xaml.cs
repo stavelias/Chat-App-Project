@@ -17,12 +17,34 @@ namespace ChatClient
 	/// </summary>
 	public partial class Notice : Window
 	{
-		public Notice()
+		public Notice(ChatMain chatMain, NoticeFunctions function, string noticeMessage)
 		{
 			InitializeComponent();
+
+			// If Main Chat Window is given, Initialize it.
+			if(chatMain != null) ChatClientWindow = chatMain;
+
+			// Sets the notice message
+			message.Text = noticeMessage;
+
+			// Sets the function wanted for the message
+			switch (function)
+			{
+				case NoticeFunctions.ServerQueriesResult:
+					ok.Click += ServerQueriesResult;
+					break;
+				case NoticeFunctions.ExitApp:
+					ok.Click += ExitApp;
+					break;
+				default:
+					ok.Click += OKBtnClick;
+					break;
+			}
+
+			this.Show();
 		}
 
-		private void OKBtnClick(object sender, MouseButtonEventArgs e)
+		private void OKBtnClick(object sender, RoutedEventArgs e)
 		{
 			this.Close();
 		}
@@ -50,6 +72,13 @@ namespace ChatClient
 			Environment.Exit(0);
 		}
 		#endregion
+
+		public enum NoticeFunctions
+		{
+			ServerQueriesResult = 0,
+			ExitApp = 1,
+			OkBtnClick = 2
+		}
 
 		public ChatMain ChatClientWindow;
 	}

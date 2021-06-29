@@ -90,6 +90,8 @@ namespace ChatClient
 			configFile.Write("IP", ip.Text);
 			configFile.Write("Port", port.Text.ToString());
 
+			// Reading from the main chat window instance so the data
+			// will be more accurate
 			chatMain.IP = ip.Text;
 			chatMain.port = Int32.Parse(port.Text);
 		}

@@ -41,8 +41,6 @@ namespace ChatClient
 			return $"{(int)type}{SEPERATOR}{username}{SEPERATOR}{password}";
 		}
 
-
-
 		public enum MessageType
 		{
 			Connect = 0,

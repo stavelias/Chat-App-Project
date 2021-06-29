@@ -50,9 +50,6 @@ namespace ChatServer
             // sets the client default channel
             client.Channel = DEFAULT_CHANNEL;
 
-            // Intialization of Connection and Disconnection Messages
-            
-
             // Defining the read buffer
             byte[] buffer = new byte[1024];
             int numOfBytes = 0;
@@ -93,12 +90,6 @@ namespace ChatServer
                     switch(messageType)
 					{
                         case MessageType.Connect:
-
-                            
-
-                            // Sends the client the channel list
-                            
-
                             // Cleans the buffer
                             buffer = new byte[1024];
                             break;
@@ -265,12 +256,11 @@ namespace ChatServer
 
             QueryResult queryResult = SendQuery(MessageType.LoginRequest, query);
 
-            NetworkStream stream = client.TcpClient.GetStream();
             string resultMessage = CreateResultMessage(MessageType.LoginRequest, queryResult, username);
             byte[] resultMessageBytes = ASCIIEncoding.ASCII.GetBytes(resultMessage);
-            stream.Write(resultMessageBytes);
-            
-            if(queryResult == QueryResult.LoginSuccessful)
+            SendMessage(resultMessageBytes, null, client, null);
+
+            if (queryResult == QueryResult.LoginSuccessful)
 			{
                 // Creates the join and leave strings
                 joinStr = $"{username} Connected to the server.";
@@ -289,22 +279,30 @@ namespace ChatServer
             
             QueryResult queryResult = SendQuery(MessageType.RegisterationRequest, query);
 
-            NetworkStream stream = client.TcpClient.GetStream();
             string resultMessage = CreateResultMessage(MessageType.RegisterationRequest, queryResult, username);
             byte[] resultMessageBytes = ASCIIEncoding.ASCII.GetBytes(resultMessage);
-            stream.Write(resultMessageBytes);
+            SendMessage(resultMessageBytes, null, client, null);
         }
 
-		#endregion
+        #endregion
 
-		const string DEFAULT_CHANNEL = "General Channel"; 
+        // Initializing a default channel, so both the client and the server
+        // knows where the client is connected to on first login
+        const string DEFAULT_CHANNEL = "General Channel"; 
+
+        // Setting message cooldown so the server won't send messages
+        // Without the client accepting it.
         private const int MESSAGE_COOLDOWN = 300;
+
+        // Saving the leave and join string here, so all the function can access them.
         public string leaveStr = "", joinStr = "";
+
+        // Saving the main window instance
+        private ChatServerMain mainChatServer;
 
         private TcpListener _server;
         private Boolean _isRunning;
         public static List<ChatClient> clients = new List<ChatClient>();
-        private ChatServerMain mainChatServer;
         public List<string> channels = new List<string>();
     }
 }

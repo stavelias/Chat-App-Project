@@ -101,6 +101,7 @@ namespace ChatClient
 
         public void ChannelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // If channel is changed, send a move channel request to the server
             SendMoveChannelRequest();
         }
 
@@ -146,14 +147,27 @@ namespace ChatClient
 
         public void ChatWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // When the window is closing, send a disconnection request to the server
             SendMessageToServer(MessageType.Disconnect, chatClient._clientName, "");
         }
 
+        // Initializing a default channel, so both the client and the server
+        // knows where the client is connected to on first login
         public const string DEFAULT_CHANNEL = "General Channel";
 
-        public string PreviousMoveChannelRequest;
+        // Initializing this to notice the server when the *user* logged
+        // in to the channel, rather than the *client* itself.
         public bool authCompelete = false;
+
+        // Saving the previous move channel request message, to avoid sending
+        // the same request twice
+        public string PreviousMoveChannelRequest;
+        
+        // Initializing the connect window, so when the user logs in, it will destroy
+        // itself, without closing the application
         public Connect ConnectWindow;
+
+        // Client instance, and details
         public Client chatClient;
         public string IP;
         public int port;

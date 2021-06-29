@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 using static ChatClient.Message;
+using static ChatClient.Notice;
 
 namespace ChatClient
 {
@@ -40,9 +41,8 @@ namespace ChatClient
             catch(Exception ex)
 			{
                 // Creating the notice message for the client user
-                Notice noticeWindow = new Notice();
-                noticeWindow.message.Text = " The Server is offline, the client will now close.";
-                noticeWindow.Show();
+                string noticeMessage = "The Server is offline, the client will now close.";
+                Notice noticeWindow = new Notice(null, NoticeFunctions.ExitApp, noticeMessage);
 
                 // Unsubscribing from the event, so it wont try to send a disconnection while the connection is closed
                 ChatClientWindow.Closing -= ChatClientWindow.ChatWindow_Closing;

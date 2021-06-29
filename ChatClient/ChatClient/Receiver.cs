@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using static ChatClient.Message;
+using static ChatClient.Notice;
 
 namespace ChatClient
 {
@@ -56,10 +57,8 @@ namespace ChatClient
                             isClientConnected = false;
 
                             // Creating the notice message for the client user
-                            Notice noticeWindow = new Notice();
-                            noticeWindow.ok.Click += noticeWindow.ExitApp;
-                            noticeWindow.message.Text = " The Server has been disconnected, the client will now close.";
-                            noticeWindow.Show();
+                            string noticeMessage = "The Server has been disconnected, the client will now close.";
+                            Notice noticeWindow = new Notice(null, NoticeFunctions.ExitApp, noticeMessage);
 
                             // Unsubscribing from the event, so it wont try to send a disconnection while the connection is closed
                             ChatClientWindow.Closing -= ChatClientWindow.ChatWindow_Closing;
@@ -73,21 +72,25 @@ namespace ChatClient
 					{
                         receivedMessage = new Message(utf8.GetString(buffer, 0, numOfBytes));
 
+                        // Getting the message type fron the recieved message
                         MessageType messageType = receivedMessage.Type;
+
+                        // Acts according to the message type
                         switch (messageType)
                         {
                             case MessageType.ChannelsUpdate:
+                                // Update Channels on the main window
                                 ChatClientWindow.UpdateChannels(receivedMessage);
                                 break;
                             case MessageType.LoginRequest:
                                 Application.Current.Dispatcher.Invoke((Action)delegate
                                 {
                                     string noticeMessage = "";
+
+                                    // Initialize a notice message according to the login result
                                     if (receivedMessage.Result == QueryResult.LoginSuccessful)
                                     {
-                                        ChatClientWindow.channelList.SelectionChanged += ChatClientWindow.ChannelList_SelectionChanged;
-                                        ChatClientWindow.ConnectWindow.Close();
-                                        ChatClientWindow.Show();
+                                        LoginSuccessful();
                                         noticeMessage = $"Welcome {receivedMessage.ClientName}.";
                                     }
                                     else
@@ -95,17 +98,16 @@ namespace ChatClient
                                         noticeMessage = "Login Failed, Username or password are incorrect";
                                     }
 
-                                    Notice noticeWindow = new Notice();
-                                    noticeWindow.ChatClientWindow = ChatClientWindow;
-                                    noticeWindow.ok.Click += noticeWindow.ServerQueriesResult;
-                                    noticeWindow.message.Text = noticeMessage;
-                                    noticeWindow.Show();
+                                    // Show a notice with the message for the user
+                                    Notice noticeWindow = new Notice(ChatClientWindow, NoticeFunctions.ServerQueriesResult, noticeMessage);
                                 });
                                 break;
                             case MessageType.RegisterationRequest:
                                 Application.Current.Dispatcher.Invoke((Action)delegate
                                 {
                                     string noticeMessage = "";
+
+                                    // Initialize a notice message according to the login result
                                     if (receivedMessage.Result == QueryResult.RegisterationSuccessful)
                                     {
                                         ChatClientWindow.ConnectWindow.loginTab.IsSelected = true;
@@ -116,11 +118,8 @@ namespace ChatClient
                                         noticeMessage = "Registration Failed, Username isn't available";
                                     }
 
-                                    Notice noticeWindow = new Notice();
-                                    noticeWindow.ChatClientWindow = ChatClientWindow;
-                                    noticeWindow.ok.Click += noticeWindow.ServerQueriesResult;
-                                    noticeWindow.message.Text = noticeMessage;
-                                    noticeWindow.Show();
+                                    // Show a notice with the message for the user
+                                    Notice noticeWindow = new Notice(ChatClientWindow, NoticeFunctions.ServerQueriesResult, noticeMessage);
                                 });
                                 break;
                             default:
@@ -143,6 +142,15 @@ namespace ChatClient
                        last message that has been received */
                     ChatClientWindow.messages.ScrollToEnd();
                 });
+            }
+
+            public void LoginSuccessful()
+			{
+                // Login was successful
+                // Preparing events, and opening the main window
+                ChatClientWindow.channelList.SelectionChanged += ChatClientWindow.ChannelList_SelectionChanged;
+                ChatClientWindow.ConnectWindow.Close();
+                ChatClientWindow.Show();
             }
 
             private NetworkStream _stream;
