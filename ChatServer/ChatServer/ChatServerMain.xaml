@@ -34,7 +34,8 @@
             <TextBox x:Name="messages" Style="{x:Null}" Foreground="White" FontFamily="Consolas" IsReadOnly="True" Background="#FF151515" BorderBrush="#00ABADB3" />
         </GroupBox>
         <Button x:Name="startServer" Style="{DynamicResource CustomMaterialDesignButton}" Content="Start" HorizontalAlignment="Left" Margin="720,502,0,0" VerticalAlignment="Top" Click="StartServerBtnClick"/>
-        <Button x:Name="addChannel" Style="{DynamicResource CustomMaterialDesignButton}" Content="Add Channel" HorizontalAlignment="Left" Margin="214,502,0,0" VerticalAlignment="Top" Click="AddChannelBtnClick" Width="117"/>
+        <Button x:Name="addChannel" Style="{DynamicResource CustomMaterialDesignButton}" Content="Add Channel" HorizontalAlignment="Left" Margin="399,502,0,0" VerticalAlignment="Top" Click="AddChannelBtnClick" Width="117"/>
         <TextBox x:Name="channel" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="New Channel" HorizontalAlignment="Left" Margin="16,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.351,0.486" Foreground="White" Height="44" FontSize="14"/>
+        <TextBox x:Name="category" Style="{DynamicResource CustomMaterialDesignTextBox}" materialDesign:HintAssist.Hint="Category" HorizontalAlignment="Left" Margin="216,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" RenderTransformOrigin="0.351,0.486" Foreground="White" Height="44" FontSize="14"/>
     </Grid>
 </Window>

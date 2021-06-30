@@ -30,7 +30,7 @@ namespace ChatClient
 
         public ChatMain()
 		{
-            InitializeComponent();   
+            InitializeComponent();
         }
 
         public void ConnectToServer()
@@ -51,7 +51,7 @@ namespace ChatClient
             // Sending the data to the server
             if(authCompelete)
 			{
-                chatClient.SendData(Message.CreateMessage(type, clientName, message, channelList.Text));
+                chatClient.SendData(Message.CreateMessage(type, clientName, message, currentChannel));
             }
             else
 			{
@@ -72,57 +72,153 @@ namespace ChatClient
 
         public void UpdateChannels(Message serverMessage)
         {
+            // Clearing categories
+            categories = new List<KeyValuePair<string, List<string>>>();
+            
             // Intializing the channels array
-            string[] channels = serverMessage.MessageText.Split(", ");
+            string[] channels = serverMessage.MessageText.Split('|');
+            
+            // Iterating over all the categories and channels string
+            for(int i = 0; i < channels.Length; i++)
+			{
+                // Even number - Category Name
+                if(i % 2 == 0)
+				{
+                    // Gets the index of the current category's channels
+                    int channelsIndex = i + 1;
 
+                    // if the index is out of boundaries, don't access it
+                    if (channelsIndex < channels.Length)
+					{
+                        // add each channel that is related to the category
+                        foreach(string channelName in channels[channelsIndex].Split(", "))
+						{
+                            AddChannelToList(channels[i], channelName);
+                        }
+                    }
+				}
+			}
+
+            // Creating the actual TreeView
             Application.Current.Dispatcher.Invoke(() =>
             {
-                // Clearing the channel list
-                channelList.Items.Clear();
+                // Clears all the data from the old categories tree view (the tree view before the update)
+                categoriesTreeView.Items.Clear();
 
-                // Adding the new channels array to the channel list
-                AddItemsToChannelList(channels);
+                // Creates a list for the channels
+                List<string> channelsList = new List<string>();
+
+				// Iterating for each category on the list of categories
+				foreach (KeyValuePair<string, List<string>> category in categories)
+                {
+                    // Creating the category item
+                    TreeViewItem categoryItem = new TreeViewItem
+                    {
+                        Header = category.Key
+                    };
+
+                    // Categories will always be expanded
+                    categoryItem.IsExpanded = true;
+
+                    // iterate for each channel that is in the same category
+                    foreach (string channel in category.Value)
+                    {
+                        TreeViewItem channelItem = new TreeViewItem();
+                        
+                        // If the channel that is currently been added is the channel that the client
+                        // is connected to, select it on the tree view, if not select the default channel
+                        // until the channel that the client is connected to is found or not.
+
+                        if (channel == currentChannel)
+						{
+                            channelItem.IsSelected = true;
+                        }
+                        else if(channel == DEFAULT_CHANNEL)
+						{
+                            channelItem.IsSelected = true;
+						}
+
+                        // Sets the name of the channel to the tree view item
+                        channelItem.Header = channel;
+
+                        // Adds the channel to the category
+                        categoryItem.Items.Add(channelItem);
+                        
+                        // Adds the channel to the channel list
+                        channelsList.Add(channel);
+                    }
+
+                    // Adds the category to the tree view
+                    categoriesTreeView.Items.Add(categoryItem);
+                }
+
+                // Sets the new channel source, as the channel list created
+                channelArr = channelsList.ToArray();
             });
         }
 
-        public void AddItemsToChannelList(string[] channels)
-        {
-            foreach (string channel in channels)
-            {
-                // Adding the channels to the channel selector
-                ComboBoxItem newChannel = new ComboBoxItem();
-                newChannel.Content = channel;
-                channelList.Items.Add(newChannel);
-            }
-
-            // Selecting the Default Channel as the connected channel
-            channelList.SelectedIndex = 0;
-        }
-
-        public void ChannelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void CategoriesTreeView_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             // If channel is changed, send a move channel request to the server
             SendMoveChannelRequest();
         }
 
-        public void SendMoveChannelRequest()
-		{
-            if (chatClient != null && channelList.SelectedValue != null)
+        public void AddChannelToList(string category, string channelName)
+        {
+            // If category exists, add it to the specific category
+            if (CategoryExists(category, channelName))
             {
-                // Gets the old and new channel
-                string oldChannel = channelList.Text;
-                string newChannel = channelList.SelectedValue.ToString();
-                string moveChannelReqStr = $"{oldChannel} {newChannel}";
-
-                if (PreviousMoveChannelRequest == moveChannelReqStr) return;
-                PreviousMoveChannelRequest = moveChannelReqStr;
-
-                // If old channel isn't the same as the new, send a move request 
-                if (oldChannel != newChannel)
-                    SendMessageToServer(MessageType.MoveChannel, chatClient._clientName, newChannel);
+                foreach (KeyValuePair<string, List<string>> categ in categories)
+                {
+                    if (categ.Key == category)
+                    {
+                        categ.Value.Add(channelName);
+                    }
+                }
             }
         }
 
+        public bool CategoryExists(string categoryName, string channel)
+        {
+            // Searches for the category
+            foreach (KeyValuePair<string, List<string>> category in categories)
+            {
+                // if found, return true and the channel will be added
+                if (category.Key == categoryName)
+                    return true;
+            }
+
+            // if not, create the category and add the channel to it
+            categories.Add(new KeyValuePair<string, List<string>>(categoryName, new List<string> { channel }));
+
+            // returns false so the channel won't be added twice
+            return false;
+        }
+
+        public void SendMoveChannelRequest()
+		{
+            if (chatClient != null && categoriesTreeView.SelectedItem != null)
+            {
+                // Gets the old and new channel
+                string newChannel = categoriesTreeView.SelectedValue.ToString();
+                string moveChannelReqStr = $"{currentChannel} {newChannel}";
+
+                // check if it's a channel and not a category
+                if (!channelArr.Contains(newChannel)) return;
+
+                // Avoiding sending the same request twice
+                if (PreviousMoveChannelRequest == moveChannelReqStr) return;
+                PreviousMoveChannelRequest = moveChannelReqStr;
+
+
+                // If old channel isn't the same as the new, send a move request 
+                if (currentChannel != newChannel)
+				{
+                    SendMessageToServer(MessageType.MoveChannel, chatClient._clientName, newChannel);
+                    currentChannel = newChannel;
+                }
+            }
+        }
 
         #endregion
 
@@ -167,9 +263,18 @@ namespace ChatClient
         // itself, without closing the application
         public Connect ConnectWindow;
 
+        // Category List with its channels
+        public List<KeyValuePair<string, List<string>>> categories = new List<KeyValuePair<string, List<string>>>();
+
+        // Channels only list
+        string[] channelArr;
+
+        // Current channel
+        string currentChannel;
+
         // Client instance, and details
         public Client chatClient;
         public string IP;
         public int port;
-    }
+	}
 }

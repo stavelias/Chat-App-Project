@@ -22,7 +22,7 @@ namespace ChatServer
         const int PORT = 5000;
 
         public ChatServerMain()
-		{
+		{ 
             InitializeComponent();
             chatServer = new Server(this, IP, PORT);
         }
@@ -40,7 +40,7 @@ namespace ChatServer
 
 		private void AddChannelBtnClick(object sender, RoutedEventArgs e)
 		{
-            chatServer.UpdateChannels(null, channel.Text);
+            chatServer.UpdateChannels(null, channel.Text, category.Text);
 		}
 
         #region TopTaskbar Functions

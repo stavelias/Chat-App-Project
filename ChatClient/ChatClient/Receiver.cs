@@ -148,7 +148,7 @@ namespace ChatClient
 			{
                 // Login was successful
                 // Preparing events, and opening the main window
-                ChatClientWindow.channelList.SelectionChanged += ChatClientWindow.ChannelList_SelectionChanged;
+                ChatClientWindow.categoriesTreeView.SelectedItemChanged += ChatClientWindow.CategoriesTreeView_SelectionChanged;
                 ChatClientWindow.ConnectWindow.Close();
                 ChatClientWindow.Show();
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -16,7 +17,7 @@ namespace ChatServer
 	{
         public Server(ChatServerMain parent, string IP, int port)
         {
-            channels.Add(DEFAULT_CHANNEL);
+            AddChannelToList("General Channels", DEFAULT_CHANNEL);
 
             _server = new TcpListener(IPAddress.Parse(IP), port);
             _server.Start();
@@ -222,21 +223,20 @@ namespace ChatServer
             SendMessage(null, Message.CreateMessage(MessageType.SystemMessage, "SYSTEM", moveChannelReq.ClientName + " has joined " + newChannel, newChannel), null, newChannel);
         }
 
-        public void UpdateChannels(ChatClient client, string channelName)
+        public void UpdateChannels(ChatClient client, string channelName, string category)
         {
             /*
                 True - Channel is given meaning it's an add channel request
                 False - A Client has been connected, and requests the channel list
             */
-            if (channelName != null)
-                channels.Add(channelName);
-
-            // Creates a string from the channels list to be able to send it
-            string channelList = String.Join(", ", channels.ToArray());
+            if (channelName != null && category != null)
+                AddChannelToList(category, channelName);
 
             // Creates the update string to the client
-            string updateString = Message.CreateMessage(MessageType.ChannelsUpdate, "SYSTEM", channelList, "");
+            string temp = CreateChannelUpdateString();
 
+            string updateString = Message.CreateMessage(MessageType.ChannelsUpdate, "SYSTEM", temp, "");
+                    
             /*  
                 True - Client has been given, so its a new client conneciton
                 False - A channel has been added, so its an update request
@@ -245,6 +245,52 @@ namespace ChatServer
                 SendMessage(null, updateString, client, null);
             else
                 SendMessage(null, updateString, null, null);
+        }
+
+        public string CreateChannelUpdateString()
+		{
+            string updateString = "";
+            foreach(KeyValuePair<string, List<string>> category in categories)
+			{
+                // Creating the update string
+                // The format will be the following
+                // "Category1|Channel1, Channel2|Category2|Channel3, Channel4"
+                updateString += $"{category.Key}|{String.Join(", ", category.Value.ToArray())}|";
+			}
+
+            return updateString;
+		}
+
+        public void AddChannelToList(string category, string channelName)
+        {
+            // If category exists, add it to the specific category
+            if (CategoryExists(category, channelName))
+            {
+                foreach (KeyValuePair<string, List<string>> categ in categories)
+                {
+                    if (categ.Key == category)
+                    {
+                        categ.Value.Add(channelName);
+                    }
+                }
+            }
+        }
+
+        public bool CategoryExists(string categoryName, string channel)
+        {
+            // Searches for the category
+            foreach (KeyValuePair<string, List<string>> category in categories)
+            {
+                // if found, return true and the channel will be added
+                if (category.Key == categoryName)
+                    return true;
+            }
+
+            // if not, create the category and add the channel to it
+            categories.Add(new KeyValuePair<string, List<string>>(categoryName, new List<string> { channel }));
+
+            // returns false so the channel won't be added twice
+            return false;
         }
 		#endregion region
 
@@ -269,7 +315,7 @@ namespace ChatServer
                 // Notifies everyone about the new conneciton
                 SystemMessage(MessageType.Connect, joinStr, null, null);
                 await Task.Delay(MESSAGE_COOLDOWN);
-                UpdateChannels(client, null);
+                UpdateChannels(client, null, null);
             }
         }
 
@@ -300,9 +346,11 @@ namespace ChatServer
         // Saving the main window instance
         private ChatServerMain mainChatServer;
 
+
+        public List<KeyValuePair<string, List<string>>> categories = new List<KeyValuePair<string, List<string>>>();
+
         private TcpListener _server;
         private Boolean _isRunning;
         public static List<ChatClient> clients = new List<ChatClient>();
-        public List<string> channels = new List<string>();
     }
 }
