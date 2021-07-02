@@ -14,9 +14,12 @@ namespace ChatClient
         // Called by producers to send data over the socket.
         public void SendData(string data)
         {
-            Encoding utf8 = Encoding.UTF8;
-            byte[] bytesToSend = utf8.GetBytes(data);
-            _sender.SendData(bytesToSend);
+            if(ChatClientWindow.isClientConnected)
+			{
+                Encoding utf8 = Encoding.UTF8;
+                byte[] bytesToSend = utf8.GetBytes(data);
+                _sender.SendData(bytesToSend);
+            }
         }
 
         // Consumers register to receive data.
@@ -57,6 +60,8 @@ namespace ChatClient
             var handler = DataReceived;
             if (handler != null) DataReceived(this, e);  // re-raise event
         }
+
+        
 
         private TcpClient _client;
         private NetworkStream _stream;

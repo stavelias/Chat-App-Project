@@ -30,7 +30,7 @@
         <Button x:Name="minimizeBtn" BorderThickness="0" materialDesign:RippleAssist.Feedback="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Click="MinimizeBtnClick" Style="{StaticResource CustomMaterialDesignFlatButton}" Width="46" Margin="0,0,46,0">
             <materialDesign:PackIcon Kind="WindowMinimize" Foreground="White" Height="31" Margin="0,5" />
         </Button>
-        <GroupBox Header="M E S S A G E S"  Margin="16,80,16,80"   materialDesign:ColorZoneAssist.Mode="Custom"    materialDesign:ColorZoneAssist.Foreground="Black" materialDesign:ColorZoneAssist.Background="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular">
+        <GroupBox Header="M E S S A G E S"  Margin="16,55,16,80"   materialDesign:ColorZoneAssist.Mode="Custom"    materialDesign:ColorZoneAssist.Foreground="Black" materialDesign:ColorZoneAssist.Background="#FF0BC8FF" FontFamily="./Fonts/#Poppins Regular">
             <TextBox x:Name="messages" Style="{x:Null}" Foreground="White" FontFamily="Consolas" IsReadOnly="True" Background="#FF151515" BorderBrush="#00ABADB3" />
         </GroupBox>
         <Button x:Name="startServer" Style="{DynamicResource CustomMaterialDesignButton}" Content="Start" HorizontalAlignment="Left" Margin="720,502,0,0" VerticalAlignment="Top" Click="StartServerBtnClick"/>

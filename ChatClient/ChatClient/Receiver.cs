@@ -36,14 +36,14 @@ namespace ChatClient
 				// Determines how many bytes has been received
 				int numOfBytes = 0;
 
-                // Checking if the client is still connected to the server
-                bool isClientConnected = true;
+                // Indicated that the client is still connected to the server
+                ChatClientWindow.isClientConnected = true;
 
                 // Received Data will be stored here
                 Message receivedMessage;
 
                 // Receiving Data
-                while (isClientConnected)
+                while (ChatClientWindow.isClientConnected)
 				{
 					try
 					{
@@ -54,7 +54,7 @@ namespace ChatClient
                         // Noticing the client about the disconnection
                         Application.Current.Dispatcher.Invoke((Action)delegate
                         {
-                            isClientConnected = false;
+                            ChatClientWindow.isClientConnected = false;
 
                             // Creating the notice message for the client user
                             string noticeMessage = "The Server has been disconnected, the client will now close.";
@@ -68,7 +68,7 @@ namespace ChatClient
                         });                     
 					}
 
-                    if(isClientConnected)
+                    if(ChatClientWindow.isClientConnected)
 					{
                         receivedMessage = new Message(utf8.GetString(buffer, 0, numOfBytes));
 

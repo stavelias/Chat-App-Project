@@ -272,6 +272,9 @@ namespace ChatClient
         // Current channel
         string currentChannel;
 
+        // Checks if the client is connected
+        public bool isClientConnected = false;
+
         // Client instance, and details
         public Client chatClient;
         public string IP;
